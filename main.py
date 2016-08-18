@@ -45,16 +45,16 @@ class Index(webapp2.RequestHandler):
         <form action="/cross-off" method="post">
             <label>
             I want to cross off
-                <select value="off-movie">
-                    <option>"Star Wars"</option>
-                    <option>"Snatch"</option>
-                    <option>"Harry Potter"</option>
-                    <option>"Gladiator"</option>
-                    <option>"The Departed"</option>
+                <select name="off-movie">
+                    <option>Star Wars</option>
+                    <option>Snatch</option>
+                    <option>Harry Potter</option>
+                    <option>Gladiator</option>
+                    <option>The Departed</option>
                 </select>
             from my list
             </label>
-                <input type="submit" value="Revmoe It"/>
+                <input type="submit" value="Remove It"/>
         </form>
         """
 
@@ -94,13 +94,13 @@ class CrossOffMovie(webapp2.RequestHandler):
         e.g. www.flicklist.com/cross-off
     """
     def post(self):
-    crossMovie = self.request.get("off-movie")
+        crossMovie = self.request.get("off-movie")
 
-    cross_off_movie = "<strike" + crossMovie + "</strike>"
-    sentence = cross_off_movie + " has been deleted from your Watchlist."
+        cross_off_movie = "<strike>" + crossMovie + "</strike>"
+        sentence = cross_off_movie + " has been deleted from your Watchlist."
 
-    response = page_header + "<p>" + sentence + "<p>" + page_footer
-    self.response.write(response)
+        response = page_header + "<p>" + sentence + "</p>" + page_footer
+        self.response.write(response)
 
 
 
