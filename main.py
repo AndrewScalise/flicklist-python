@@ -110,7 +110,6 @@ class AddMovie(webapp2.RequestHandler):
         if not new_movie:
             # make a helpful error message
             error = "Type something fool!"
-            error_escaped = cgi.escape(error, quote=True)
 
             # redirect to homepage, and include error as a query parameter in the URL
             self.redirect("/?error=" + error_escaped)
@@ -120,7 +119,6 @@ class AddMovie(webapp2.RequestHandler):
         if new_movie in terrible_movies:
             # make a helpful error message
             error = "That's a terrible movie!"
-            error_escaped = cgi.escape(error, quote=True)
 
             # redirect to homepage, and include error as a query parameter in the URL
             self.redirect("/?error=" + error_escaped)
