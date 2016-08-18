@@ -41,6 +41,22 @@ class Index(webapp2.RequestHandler):
 
         # TODO 1
         # Include another form so the user can "cross off" a movie from their list.
+        cross_form = """
+        <form action="/cross-off" method="post">
+            <label>
+            I want to cross off
+                <select value="off-movie">
+                    <option>"Star Wars"</option>
+                    <option>"Snatch"</option>
+                    <option>"Harry Potter"</option>
+                    <option>"Gladiator"</option>
+                    <option>"The Departed"</option>
+                </select>
+            from my list
+            </label>
+                <input type="submit" value="Revmoe It"/>
+        </form>
+        """
 
 
         # TODO 4 (Extra Credit)
@@ -48,7 +64,7 @@ class Index(webapp2.RequestHandler):
         # text box (<input type="text"/>)
 
 
-        response = page_header + edit_header + add_form + page_footer
+        response = page_header + edit_header + add_form + cross_form + page_footer
         self.response.write(response)
 
 
@@ -73,6 +89,19 @@ class AddMovie(webapp2.RequestHandler):
 # Create a new RequestHandler class called CrossOffMovie, to receive and
 # handle the request from your 'cross-off' form. The user should see a message like:
 # "Star Wars has been crossed off your watchlist".
+class CrossOffMovie(webapp2.RequestHandler):
+    """ Handles requests coming in to '/cross-off'
+        e.g. www.flicklist.com/cross-off
+    """
+    def post(self):
+    crossMovie = self.request.get("off-movie")
+
+    cross_off_movie = "<strike" + crossMovie + "</strike>"
+    sentence = cross_off_movie + " has been deleted from your Watchlist."
+
+    response = page_header + "<p>" + sentence + "<p>" + page_footer
+    self.response.write(response)
+
 
 
 
@@ -80,5 +109,6 @@ class AddMovie(webapp2.RequestHandler):
 # Include a route for your cross-off handler, by adding another tuple to the list below.
 app = webapp2.WSGIApplication([
     ('/', Index),
-    ('/add', AddMovie)
+    ('/add', AddMovie),
+    ('/cross-off', CrossOffMovie)
 ], debug=True)
