@@ -66,8 +66,12 @@ class AddMovie(webapp2.RequestHandler):
 
         # TODO 1
         # Use a template to render the confirmation message
-
-        self.response.write("Under construction...")
+        t_addMovie = jinja_env.get_template("addMovie.html")
+        add_movie = t_addMovie.render(movie=new_movie)
+        title = "FlickList: Add Movie"
+        response = t_scaffolding.render(
+                    title = title, content = add_movie)
+        self.response.write(response)
 
 
 class CrossOffMovie(webapp2.RequestHandler):
