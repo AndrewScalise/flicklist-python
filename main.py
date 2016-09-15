@@ -231,7 +231,7 @@ class RecentlyWatchedMovies(Handler):
         # Replace the code below with code that renders the 'recently-watched.html' template
         # Don't forget to pass recently_watched_movies over to your template.
         t = jinja_env.get_template("recently-watched.html")
-        response = t.render(movies = recently_watched_movies)
+        response = t.render(user = self.user, movies = recently_watched_movies)
         self.response.write(response)
 
 

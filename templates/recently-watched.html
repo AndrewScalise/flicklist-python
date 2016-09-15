@@ -11,6 +11,6 @@ For each movie in the list, display the username of whoever watched it and what 
     e.g. Jesse watched The Big Green, and gave it a rating of ***** stars.
 -->
 {% for movie in movies %}
-    <li>{{movie.owner}} watched {{movie.title}}, and gave it a rating of {{movie.rating}} stars.</li>
+    <li>{{movie.owner.username}} watched {{movie.title}}, and gave it a rating of {{movie.rating}} stars.</li>
 {% endfor %}
 {% endblock %}
